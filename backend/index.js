@@ -14,9 +14,5 @@ app.listen(3000, (error) => {
   connect()
 })
 
-app.get('/get-todo', (req, res) => {
-  res.send('nounou')
-})
-
 
 
