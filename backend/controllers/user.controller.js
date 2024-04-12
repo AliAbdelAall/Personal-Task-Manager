@@ -12,7 +12,21 @@ const getAllUsers = async (req, res) => {
 
 }
 
+const getUserById = async (req, res) => {
+  const { id } = req.params
+  try {
+    const user = User.findById(id)
+    return res.json(user)
+  } catch (error) {
+    return res.status(500).send('Internal server error!')
+  }
+}
+
+
+
 module.exports =
 {
   getAllUsers,
+  getUserById,
+
 }
