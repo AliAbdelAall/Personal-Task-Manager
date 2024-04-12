@@ -12,10 +12,12 @@ app.use(express.json())
 
 const userRouter = require('./routes/user.routes')
 
+
+// app.use('/auth', authRouter)
 app.use('/users', userRouter)
 
 app.listen(port, (error) => {
-  if (error) throw error
+  if (error) throw new Error(error)
   console.log(`server is running on port ${port}`)
   connect()
 })
