@@ -16,5 +16,17 @@ const register = async (req, res) => {
   }
 }
 
+const login = async (req, res) => {
+  const { username, password } = req.body
+  const user = await User.findOne({ username })
+  if (!user) return res.status(400).send("username/password incorrect")
 
-module.exports = { register }
+  const isMatch = await user.comparePassword(password)
+  if (!isMatch) return res.status(400).send("username/password incorrect")
+
+  const token = jwt.sign({ _d: user._id }, process.env.JWT_SECRET)
+  return res.status(200).json(user, token)
+
+}
+
+module.exports = { register, login }
