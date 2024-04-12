@@ -1,4 +1,4 @@
-const User = require('../models/user.model')
+const { User } = require('../models/user.model')
 
 const getAllUsers = async (req, res) => {
 
@@ -14,10 +14,14 @@ const getAllUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
   const { id } = req.params
+
   try {
-    const user = User.findById(id)
+    const user = await User.findById(id)
+    console.log(user)
     return res.json(user)
+
   } catch (error) {
+    console.log(error)
     return res.status(500).send('Internal server error!')
   }
 }
@@ -42,5 +46,5 @@ module.exports =
 {
   getAllUsers,
   getUserById,
-
+  createUser,
 }
