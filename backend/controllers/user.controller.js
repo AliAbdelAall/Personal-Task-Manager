@@ -22,7 +22,21 @@ const getUserById = async (req, res) => {
   }
 }
 
+const createUser = async (req, res) => {
+  const { email, username, password } = req.body
 
+  try {
+    const createdUser = await User.create({
+      username,
+      email,
+      password
+    })
+    return res.json(createdUser)
+  } catch (error) {
+    return res.status(500).send('Internal server error!')
+  }
+
+}
 
 module.exports =
 {
