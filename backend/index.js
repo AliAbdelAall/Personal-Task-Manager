@@ -1,5 +1,4 @@
 const express = require("express")
-
 const { connect } = require('./config/mongoDB.config')
 
 require("dotenv").config()
@@ -13,7 +12,6 @@ app.use(express.json())
 const userRouter = require('./routes/user.routes')
 const authRouter = require('./routes/auth.routes')
 
-
 app.use('/auth', authRouter)
 app.use('/users', userRouter)
 
@@ -22,6 +20,3 @@ app.listen(port, (error) => {
   console.log(`server is running on port ${port}`)
   connect()
 })
-
-
-
