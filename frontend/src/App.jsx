@@ -1,5 +1,5 @@
 // React stuff
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 // Styles
 import "./styles/main.css";
@@ -15,12 +15,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // Layouts
-import Auth from "./pages/Authentication"
-import Main from "./pages/Main";
+import Auth from "./pages/Auth";
+// import Main from "./pages/Main";
 
 // Auth components
-import Login from "./pages/Authentication/components/Login";
-import Signup from "./pages/Authentication/components/Signup";
+import Login from "./pages/Auth/components/Login";
+import Signup from "./pages/Auth/components/Signup";
 
 function App() {
   return (

@@ -66,6 +66,15 @@ const Signup = () => {
       <div className='flex column center input-wrapper'>
         <h1>Instagram</h1>
         {error && <p className='text-xsm text-error error-text'>{errorMessage}</p>}
+
+        <Input
+        type={"text"}
+        placeholder={'Username'}
+        handleChange={(e) => {
+          const change = handleInputChange({key: "username", value: e.target.value})
+          dispatcher(change)}}
+        />
+
         <Input
         type={"text"}
         placeholder={'Email'}
@@ -75,23 +84,18 @@ const Signup = () => {
         />
         
         <Input
-        type={"text"}
-        placeholder={'Username'}
-        handleChange={(e) => {
-          const change = handleInputChange({key: "username", value: e.target.value})
-          dispatcher(change)}}
-        />
-        <Input
         type={"password"}
         placeholder={'Password'}
         handleChange={(e) => {
           const change = handleInputChange({key: "password", value: e.target.value})
           dispatcher(change)}}
         />
+
         <Button
         text={"Signup"}
         handleClick={validateSignup}
         />
+        
       </div>
       <div className='flex center  login-switch'>
         <p className='text-sm'>Have an account? </p> 

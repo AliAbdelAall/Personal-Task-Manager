@@ -66,9 +66,9 @@ const Login = () => {
         {error && <p className='text-xsm text-error error-text'>{errorMessage}</p>}
         <Input
         type={"text"}
-        placeholder={'Username, or email'}
+        placeholder={'Username'}
         handleChange={(e) => {
-          const change = handleInputChange({key: "identifier", value: e.target.value}) 
+          const change = handleInputChange({key: "username", value: e.target.value}) 
           dispatcher(change)}}
         />
         <Input
