@@ -95,7 +95,7 @@ const Signup = () => {
         text={"Signup"}
         handleClick={validateSignup}
         />
-        
+
       </div>
       <div className='flex center  login-switch'>
         <p className='text-sm'>Have an account? </p> 
