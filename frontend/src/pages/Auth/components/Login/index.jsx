@@ -48,7 +48,7 @@ const Login = () => {
       if(response.status === 200){
         setLocalUser(response.data.token)
         toast.success("Login successful")
-        navigate('/main')
+        navigate('/home')
       }else{
         const errorAction = setError("Username/password incorrect") 
         dispatcher(errorAction)

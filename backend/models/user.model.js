@@ -9,6 +9,10 @@ const taskSchema = new mongoose.Schema({
 });
 
 const columnSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
   tasks: {
     type: [taskSchema],
     default: []
@@ -16,6 +20,10 @@ const columnSchema = new mongoose.Schema({
 });
 
 const boardSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
   columns: {
     type: [columnSchema],
     default: {}

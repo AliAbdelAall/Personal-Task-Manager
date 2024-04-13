@@ -51,7 +51,7 @@ const Signup = () => {
       if(response.status === 201){
         setLocalUser(response.data.token)
         toast.success('Login successful')
-        navigate('/main')
+        navigate('/home')
       }else if (response.data.message){
         const errorAction = setError('User already exists') 
         dispatcher(errorAction)
