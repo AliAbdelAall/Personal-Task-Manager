@@ -20,3 +20,7 @@ const userSlice = createSlice({
 })
 
 export const { setUserInfo } = userSlice.actions
+
+export const userSliceName = userSlice.name
+
+export default userSlice.reducer
