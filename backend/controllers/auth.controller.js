@@ -39,11 +39,11 @@ const login = async (req, res) => {
     if (!isMatch) return res.status(400).send("username/password incorrect")
 
     const token = jwt.sign({ _d: user._id }, process.env.JWT_SECRET, { expiresIn: "2hrs" })
-    return res.status(200).json(user, token)
+    return res.status(200).json({ user, token })
 
   } catch (error) {
     console.log(error);
-    return res.send(500).send("Internal server error!");
+    return res.status(500).send("Internal server error!");
   }
 
 }
