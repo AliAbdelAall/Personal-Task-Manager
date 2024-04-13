@@ -8,7 +8,7 @@ const register = async (req, res) => {
     const { username, email, password } = req.body
     console.log(username, email, password)
 
-    const user = await User.findOne({ username })
+    const user = await User.findOne({ username }).select("-password")
 
     if (user) return res.status(400).send("User already exists!")
     const hashedPssword = await bcrypt.hash(password, 10)
@@ -18,8 +18,8 @@ const register = async (req, res) => {
       email,
       password: hashedPssword
     })
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: "2hrs" })
-    return res.status(201).json({ user: createdUser, token })
+    const token = jwt.sign({ _id: createdUser._id }, process.env.JWT_SECRET, { expiresIn: "2hrs" })
+    return res.status(201).json({ message: "User Created succsessfully", token: token })
 
   } catch (error) {
     console.log(error)
@@ -38,8 +38,8 @@ const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) return res.status(400).send("username/password incorrect")
 
-    const token = jwt.sign({ _d: user._id }, process.env.JWT_SECRET, { expiresIn: "2hrs" })
-    return res.status(200).json({ user, token })
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: "2hrs" })
+    return res.status(200).json({ message: "Logged in succsessfully", token: token })
 
   } catch (error) {
     console.log(error);

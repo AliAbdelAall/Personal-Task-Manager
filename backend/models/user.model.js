@@ -1,24 +1,25 @@
 const mongoose = require('mongoose')
 
-const boardSchema = new mongoose.Schema({
-  columns: {
-    tyype: [columnSchema],
-    default: {}
-  },
 
-});
-const columnSchema = new mongoose.Schema({
-  tasks: {
-    type: [taskSchema],
-    default: []
-  }
-
-});
 const taskSchema = new mongoose.Schema({
   title: String,
   description: String,
   attachment: String,
   flag: String
+});
+
+const columnSchema = new mongoose.Schema({
+  tasks: {
+    type: [taskSchema],
+    default: []
+  }
+});
+
+const boardSchema = new mongoose.Schema({
+  columns: {
+    type: [columnSchema],
+    default: {}
+  },
 });
 
 const userSchema = new mongoose.Schema({
@@ -49,7 +50,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: "Password is required",
     minlength: [6, 'Password must be at least 6 characters long'],
-    select: false
   },
 
   boards: {
