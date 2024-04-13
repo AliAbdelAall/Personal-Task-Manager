@@ -4,12 +4,13 @@ const bcrypt = require("bcryptjs")
 
 const register = async (req, res) => {
 
-  const { username, email, password } = req.body
-
   try {
-    const user = user.find(username)
-    if (user) return res.status(500).send("internal server error!")
+    const { username, email, password } = req.body
+    console.log(username, email, password)
 
+    const user = await User.findOne({ username })
+
+    if (user) return res.status(400).send("User already exists!")
     const hashedPssword = await bcrypt.hash(password, 10)
 
     const createdUser = await User.create({
@@ -17,9 +18,11 @@ const register = async (req, res) => {
       email,
       password: hashedPssword
     })
-
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: "2hrs" })
     return res.status(201).json({ user: createdUser, token })
+
   } catch (error) {
+    console.log(error)
     return res.status(500).send("Internal server error!")
   }
 }
