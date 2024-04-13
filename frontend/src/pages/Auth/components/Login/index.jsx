@@ -17,9 +17,9 @@ import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'
 
 // Tools
-import { sendRequest } from '../../../../Core/Tools/remote/request';
+import { sendRequest } from '../../../../core/Utilities/remote/request';
 import { requestMethods } from '../../../../core/Enums/requestMethods';
-// import { setLocalUser } from '../../../../Core/Tools/local/user';
+import { setLocalUser } from '../../../../core/Utilities/local/user';
 
 
 
@@ -35,13 +35,13 @@ const Login = () => {
       dispatcher(errorAction)
       return
     }
-    if(password.length < 8){
+    if(password.length < 6){
       const errorAction = setError('Password must be at least 6 characters long')
       dispatcher(errorAction)
       return
     }
 
-    sendRequest(requestMethods.POST, "/login", {
+    sendRequest(requestMethods.POST, "/auth/login", {
       username,
       password,
     }).then((response) =>{
@@ -62,7 +62,7 @@ const Login = () => {
   return (
     <div className='flex column center login-wrapper'>
       <div className='flex column center input-wrapper'>
-        <h1>Instagram</h1>
+        <h1>Taskify</h1>
         {error && <p className='text-xsm text-error error-text'>{errorMessage}</p>}
         <Input
         type={"text"}

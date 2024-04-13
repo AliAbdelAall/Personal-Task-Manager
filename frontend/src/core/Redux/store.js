@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"
+import logger from "redux-logger"
 import authSliceReducer, { authSliceName } from "./auth/authSlice"
 import userSliceReducer, { userSliceName } from "./user/useSlice"
 

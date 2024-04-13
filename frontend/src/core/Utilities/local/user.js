@@ -1,4 +1,4 @@
-export const SetLocalUser = (token) => {
+export const setLocalUser = (token) => {
   localStorage.token = token
 }
 

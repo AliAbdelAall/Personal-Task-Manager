@@ -13,9 +13,9 @@ import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'
 
 // utilities
-import { sendRequest } from '../../../../Core/Tools/remote/request'
+import { sendRequest } from '../../../../core/Utilities/remote/request' 
 import { requestMethods } from '../../../../core/Enums/requestMethods'
-// import { setLocalUser } from '../../../../Core/Tools/local/user'
+import { setLocalUser } from '../../../../core/Utilities/local/user'
 
 
 const Signup = () => {
@@ -31,7 +31,7 @@ const Signup = () => {
       dispatcher(errorAction)
       return
     }
-    if (username.length < 6){
+    if (username.length < 3){
       const errorAction = setError("Username must be 3->20 charachters")
       dispatcher(errorAction)
       return
@@ -43,7 +43,7 @@ const Signup = () => {
       return
     }
 
-    sendRequest(requestMethods.POST, "/register", {
+    sendRequest(requestMethods.POST, "/auth/register", {
       username,
       email,
       password
@@ -64,7 +64,7 @@ const Signup = () => {
   return (
     <div className='flex column center login-wrapper'>
       <div className='flex column center input-wrapper'>
-        <h1>Instagram</h1>
+        <h1>Taskify</h1>
         {error && <p className='text-xsm text-error error-text'>{errorMessage}</p>}
 
         <Input
@@ -107,7 +107,7 @@ const Signup = () => {
           dispatcher(switchLogin)
         }} 
         >
-          Sign up
+          Log in
         </Link>
       </div>
     </div>

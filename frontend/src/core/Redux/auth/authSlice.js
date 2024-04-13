@@ -22,7 +22,7 @@ const authSlice = createSlice({
       state.isLogin = true
     },
 
-    handleInputchange: (state, action) => {
+    handleInputChange: (state, action) => {
       const { key, value } = action.payload
       state[key] = value
       state.error = false
@@ -44,7 +44,7 @@ const authSlice = createSlice({
 export const {
   switchToSignup,
   switchToLogin,
-  handleInputchange,
+  handleInputChange,
   setError,
   resetError
 } = authSlice.actions

@@ -16,14 +16,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 // Layouts
 import Auth from "./pages/Auth";
-// import Main from "./pages/Main";
 
 // Auth components
 import Login from "./pages/Auth/components/Login";
 import Signup from "./pages/Auth/components/Signup";
 
-function App() {
+const App = () => {
   return (
+    
     <Provider store={store}>
       <BrowserRouter>
       <ToastContainer
@@ -44,11 +44,6 @@ function App() {
           <Route path="signup" element={<Signup/>}/>
         </Route>
 
-        {/* <Route path="/main" element={<Main/>}>
-          <Route index element={<Feed/>}/>
-          <Route path="profile" element={<Profile/>}/>
-        </Route> */}
-
       </Routes>
       </BrowserRouter>
     </Provider>
@@ -56,4 +51,3 @@ function App() {
 }
 
 export default App;
-
