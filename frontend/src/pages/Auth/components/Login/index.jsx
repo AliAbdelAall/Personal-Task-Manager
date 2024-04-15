@@ -9,9 +9,6 @@ import { authSliceName, switchToSignup, handleInputChange, setError } from '../.
 // Taostify
 import { toast } from 'react-toastify'
 
-// styles
-import "./style.css"
-
 // components
 import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'

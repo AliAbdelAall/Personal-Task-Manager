@@ -47,7 +47,7 @@ const App = () => {
         </Route>
 
         <Route path="/home" element={<Home/>}>
-          <Route index elemet={<Board/>}/>
+          <Route index element={<Board/>}/>
         </Route>
 
       </Routes>
