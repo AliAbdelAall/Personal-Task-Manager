@@ -1,11 +1,10 @@
 const { User } = require('../models/user.model')
 
 const getUserById = async (req, res) => {
-  const { id } = req.params
+  const { user } = req
 
   try {
-    const user = await User.findById(id)
-    console.log(user)
+
     return res.json(user)
 
   } catch (error) {
@@ -14,4 +13,27 @@ const getUserById = async (req, res) => {
   }
 }
 
-module.exports = { getUserById }
+const addBoard = async (req, res) => {
+  const { name } = req.body
+  const { user } = req
+
+  try {
+    const newBoard = {
+      name,
+      columns: []
+    }
+
+    user.boards.push(newBoard)
+
+    await user.save()
+
+    return res.status(201).json({ message: 'Board added successfully', board: newBoard });
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send('Internal server error!');
+  }
+
+}
+
+module.exports = { getUserById, addBoard }

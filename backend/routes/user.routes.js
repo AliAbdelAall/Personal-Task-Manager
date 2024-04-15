@@ -1,13 +1,10 @@
 const express = require('express')
-
-const {
-  getAllUsers,
-  getUserById,
-  createUser,
-} = require('../controllers/user.controller')
-
+const { getUserById, addBoard } = require("../controllers/user.controller")
+const isAuthenticated = require("../middlewares/auth.middleware")
 const router = express.Router()
 
-router.get('/:id/get-user', getUserById)
+
+router.get('/get-user', isAuthenticated, getUserById)
+router.post('/add-board', isAuthenticated, addBoard)
 
 module.exports = router
