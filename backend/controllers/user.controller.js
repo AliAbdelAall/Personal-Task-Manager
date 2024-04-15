@@ -33,7 +33,27 @@ const addBoard = async (req, res) => {
     console.log(error);
     return res.status(500).send('Internal server error!');
   }
-
 }
 
-module.exports = { getUserById, addBoard }
+const addTag = async (req, res) => {
+  const { name } = req.body
+  const { user } = req
+
+  try {
+    const newTag = {
+      name,
+    }
+
+    user.tags.push(newTag)
+
+    await user.save()
+
+    return res.status(201).json({ message: 'Tag added successfully', tag: newTag });
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send('Internal server error!');
+  }
+}
+
+module.exports = { getUserById, addBoard, addTag }
