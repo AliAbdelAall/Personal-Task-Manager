@@ -8,7 +8,7 @@ import Sidebar from './Sidebar'
 const Home = () => {
   return (
     <div className='flex'>
-      <Sidebar/>
+      {/* <Sidebar/> */}
       <Outlet/>
     </div>
   )

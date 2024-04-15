@@ -29,7 +29,7 @@ const login = async (req, res) => {
     const user = await User.findOne({ username })
     if (!user) return res.status(400).send("username/password incorrect")
 
-    const isMatch = await user.comparePassword(password)
+    const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) return res.status(400).send("username/password incorrect")
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: "2hrs" })

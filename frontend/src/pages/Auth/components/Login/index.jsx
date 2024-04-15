@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from "react-router-dom"
 
-
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { authSliceName, switchToSignup, handleInputChange, setError } from '../../../../core/Redux/auth/authSlice';
@@ -51,8 +50,8 @@ const Login = () => {
         dispatcher(errorAction)
       }
     }).catch((error) => {
-      toast.error("Something Went Wrong")
-      console.error(error)
+      const errorAction = setError("Username/password incorrect") 
+        dispatcher(errorAction)
     })
   }
 

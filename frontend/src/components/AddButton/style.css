@@ -1,0 +1,12 @@
+.add-btn{
+  font-size: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  margin-left: 10px ;
+}
+
+.add-btn:hover{
+  opacity: 0.8;
+  cursor: pointer;
+}

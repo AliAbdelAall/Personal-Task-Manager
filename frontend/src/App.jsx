@@ -22,6 +22,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Auth/components/Login";
 import Signup from "./pages/Auth/components/Signup";
 import Board from "./pages/Home/Board";
+import MyBoards from "./pages/Home/MyBoards";
 
 const App = () => {
   return (
@@ -47,7 +48,8 @@ const App = () => {
         </Route>
 
         <Route path="/home" element={<Home/>}>
-          <Route index element={<Board/>}/>
+          <Route index element={<MyBoards/>}/>
+          <Route path="board/:id" element={<Board/>}/>
         </Route>
 
       </Routes>
