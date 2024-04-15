@@ -8,16 +8,10 @@ const register = async (req, res) => {
     const { username, email, password } = req.body
     console.log(username, email, password)
 
-    const user = await User.findOne({ username }).select("-password")
-
+    const user = await User.findOne({ username })
     if (user) return res.status(400).send("User already exists!")
-    const hashedPssword = await bcrypt.hash(password, 10)
 
-    const createdUser = await User.create({
-      username,
-      email,
-      password: hashedPssword
-    })
+    const createdUser = await User.create(req.body)
     const token = jwt.sign({ _id: createdUser._id }, process.env.JWT_SECRET, { expiresIn: "2hrs" })
     return res.status(201).json({ message: "User Created succsessfully", token: token })
 
@@ -35,7 +29,7 @@ const login = async (req, res) => {
     const user = await User.findOne({ username })
     if (!user) return res.status(400).send("username/password incorrect")
 
-    const isMatch = await bcrypt.compare(password, user.password)
+    const isMatch = await user.comparePassword(password)
     if (!isMatch) return res.status(400).send("username/password incorrect")
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: "2hrs" })

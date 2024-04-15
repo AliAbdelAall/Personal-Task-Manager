@@ -16,7 +16,7 @@ const taskSchema = new mongoose.Schema({
 
   description: String,
 
-  attachment: Image,
+  attachment: String,
 
   completed: {
     type: Boolean,
@@ -91,8 +91,8 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 10)
 })
 
-userSchema.methods.comparePassword = function (rawPassword) {
-  return bcrypt.compare(candidatePassword, this.password)
+userSchema.methods.comparePassowrd = function (candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password);
 }
 
 const User = mongoose.model('User', userSchema)

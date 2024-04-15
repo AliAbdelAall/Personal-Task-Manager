@@ -15,11 +15,11 @@ const authSlice = createSlice({
   reducers: {
     switchToSignup: (state, action) => {
       Object.assign(state, initialState)
+      state.isLogin = false
     },
 
     switchToLogin: (state, action) => {
       Object.assign(state, initialState)
-      state.isLogin = true
     },
 
     handleInputChange: (state, action) => {
