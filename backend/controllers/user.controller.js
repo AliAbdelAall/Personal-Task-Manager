@@ -61,11 +61,9 @@ const addColumn = async (req, res) => {
   const { user } = req
   console.log(boardId)
   try {
-    const board = user.boards.id(boardId)
 
-    if (!board) {
-      return res.status(404).send("Board not found")
-    }
+    const board = user.boards.id(boardId)
+    if (!board) return res.status(404).send("Board not found")
 
     const newColumn = {
       title,
@@ -73,18 +71,50 @@ const addColumn = async (req, res) => {
     }
     board.columns.push(newColumn)
     await user.save()
+
+    const addedColumn = board.columns[board.columns.length - 1]
+
     return res.status(201).json({
       message: "Column created successfuly",
-      column: { ...newColumn, boardId: boardId, }
+      column: { ...newColumn, _id: addedColumn._id, boardId: boardId, }
     })
 
   } catch (error) {
     console.log(error);
     return res.status(500).send('Internal server error!');
   }
-
-
-
 }
 
-module.exports = { getUserById, addBoard, addTag, addColumn }
+const addTask = async (req, res) => {
+  const { boardId, columnId, title, description, tagId } = req.body
+  const { user } = req
+
+  try {
+    const board = user.boards.id(boardId)
+    if (!board) return res.status(404).send("Board not found")
+
+    const column = board.columns.id(columnId)
+    if (!column) return res.status(404).send("Column not found")
+
+    const tag = user.tags.id(tagId)
+    if (!tag) return res.status(404).send("Tag not found")
+
+    const newTask = { title, description, tag, }
+
+    column.tasks.push(newTask)
+
+    await user.save()
+
+    const addedTask = column.tasks[column.tasks.length - 1]
+
+    return res.status(201).json({
+      message: "Task created successfuly",
+      task: { ...newTask, _id: addedTask._id, boardId, columnId, }
+    })
+  } catch (error) {
+    console.log(error)
+    return res.status(500).send("Internale server error!")
+  }
+}
+
+module.exports = { getUserById, addBoard, addTag, addColumn, addTask }
