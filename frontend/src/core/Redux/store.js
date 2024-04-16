@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit"
 
 // Slices
-import authSliceReducer, { authSliceName } from "./auth/authSlice"
-import userSliceReducer, { userSliceName } from "./user/useSlice"
-import boardSliceReducer, { boardSliceName } from "./boards/boards"
-import tagsSliceReducer, { tagsSliceName } from "./boards/taskSlice"
+import authReducer, { authSliceName } from "./auth/authSlice"
+import userReducer, { userSliceName } from "./user/useSlice"
+import boardReducer, { boardSliceName } from "./boards/boardsSlice"
+import tagsReducer, { tagsSliceName } from "./boards/taskSlice"
+import columnReducer, { columnSliceName } from "./boards/columnSlice"
 
 // Logger
 import logger from "redux-logger"
@@ -12,10 +13,11 @@ import logger from "redux-logger"
 
 export const store = configureStore({
   reducer: {
-    [authSliceName]: authSliceReducer,
-    [userSliceName]: userSliceReducer,
-    [boardSliceName]: boardSliceReducer,
-    [tagsSliceName]: tagsSliceReducer,
+    [authSliceName]: authReducer,
+    [userSliceName]: userReducer,
+    [boardSliceName]: boardReducer,
+    [tagsSliceName]: tagsReducer,
+    [columnSliceName]: columnReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 })
