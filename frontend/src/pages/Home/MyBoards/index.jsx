@@ -31,7 +31,7 @@ const MyBoards = () => {
   }
 
   return (
-    <div className='flex column my-boards-container'>
+    <div className='flex column my-boards-container container'>
       <div className='flex column'>
         <h3>username</h3>
         <p >Email</p>

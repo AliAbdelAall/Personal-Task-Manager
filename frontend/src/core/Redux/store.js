@@ -4,6 +4,7 @@ import { configureStore } from "@reduxjs/toolkit"
 import authSliceReducer, { authSliceName } from "./auth/authSlice"
 import userSliceReducer, { userSliceName } from "./user/useSlice"
 import boardSliceReducer, { boardSliceName } from "./boards/boards"
+import tagsSliceReducer, { tagsSliceName } from "./boards/taskSlice"
 
 // Logger
 import logger from "redux-logger"
@@ -14,6 +15,7 @@ export const store = configureStore({
     [authSliceName]: authSliceReducer,
     [userSliceName]: userSliceReducer,
     [boardSliceName]: boardSliceReducer,
+    [tagsSliceName]: tagsSliceReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 })

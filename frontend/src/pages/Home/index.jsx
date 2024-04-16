@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom"
 
 const Home = () => {
   return (
-    <div className='flex'>
+    <div className='flex Container'>
 
       <Outlet/>
     </div>
