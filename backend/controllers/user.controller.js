@@ -76,7 +76,7 @@ const addColumn = async (req, res) => {
 
     return res.status(201).json({
       message: "Column created successfuly",
-      column: { ...newColumn, _id: addedColumn._id, boardId: boardId, }
+      column: { ...addedColumn._doc, boardId: boardId, }
     })
 
   } catch (error) {
@@ -106,10 +106,11 @@ const addTask = async (req, res) => {
     await user.save()
 
     const addedTask = column.tasks[column.tasks.length - 1]
+    console.log({ ...addedTask._doc })
 
     return res.status(201).json({
       message: "Task created successfuly",
-      task: { ...newTask, _id: addedTask._id, boardId, columnId, }
+      task: { ...addedTask._doc, boardId, columnId }
     })
   } catch (error) {
     console.log(error)
