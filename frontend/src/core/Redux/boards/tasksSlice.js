@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  columnId: "",
-  tasks: []
+  tasks: [],
+  count: 0,
+  done: 0,
+  rest: 0
 }
 
 const tasksSlice = createSlice({
@@ -10,8 +12,19 @@ const tasksSlice = createSlice({
   name: "tasksSlice",
   reducers: {
     setTasks: (state, action) => {
-      const { columnId, tasks } = action.payload
-      return { ...state, columnId, tasks: [...tasks] }
+      const newTasks = action.payload.map(task => {
+        state.count++;
+        if (task.completed) {
+          state.done++;
+        } else {
+          state.rest++;
+        }
+        return {
+          ...task
+        };
+      });
+
+      state.tasks = [...newTasks];
     },
 
     addTask: (state, action) => {
