@@ -16,6 +16,10 @@ import { sendRequest } from '../../../core/Utilities/remote/request';
 import { requestMethods } from '../../../core/Enums/requestMethods';
 import { toast } from 'react-toastify';
 
+// dnd
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
+
 const Board = () => {
 
   const { columns } = useSelector((global) => global[columnSliceName])
@@ -59,37 +63,39 @@ const Board = () => {
         />
         <h2>{board.name}</h2>
       </div>
-      <div className='flex columns-wrapper'>
+      <DndProvider backend={HTML5Backend}>
+        <div className='flex columns-wrapper'>
 
-        {boardColumns?.map((column)=>(
-          <Column
-          key={column._id}
-          currentColumnId={column._id}
-          title={column.title}
-          currentBoardId={boardId}
-          />
-      
-        ))
-        }
-        <div className='column-wrapper'>
-          {isColumnAdd && <Input
-          placeholder={"title"}
-          handleChange={(e) => setColumnInput(e.target.value)}
-          />}
-          <Button
-          text={isColumnAdd?"Confirm":"Add Column"}
-          handleClick={() => {
-            if(!isColumnAdd){
-              setIsColumnAdd(true)
-            }else{
-              handleAddColumn()
-              setIsColumnAdd(false)
-            }
-          }}
-          />
+          {boardColumns?.map((column)=>(
+            <Column
+            key={column._id}
+            currentColumnId={column._id}
+            title={column.title}
+            currentBoardId={boardId}
+            />
+        
+          ))
+          }
+          <div className='column-wrapper'>
+            {isColumnAdd && <Input
+            placeholder={"title"}
+            handleChange={(e) => setColumnInput(e.target.value)}
+            />}
+            <Button
+            text={isColumnAdd?"Confirm":"Add Column"}
+            handleClick={() => {
+              if(!isColumnAdd){
+                setIsColumnAdd(true)
+              }else{
+                handleAddColumn()
+                setIsColumnAdd(false)
+              }
+            }}
+            />
+          </div>
+
         </div>
-
-      </div>
+      </DndProvider>
     </div>
   );
 };
