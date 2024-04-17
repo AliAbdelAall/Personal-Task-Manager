@@ -110,7 +110,7 @@ const addTask = async (req, res) => {
 
     return res.status(201).json({
       message: "Task created successfuly",
-      task: { ...addedTask._doc, boardId, columnId }
+      task: { ...addedTask._doc, columnId }
     })
   } catch (error) {
     console.log(error)
