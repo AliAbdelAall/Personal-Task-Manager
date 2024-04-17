@@ -1,7 +1,6 @@
 .board-container{
   padding: 20px 80px;
   width: 100vw;
-
 }
 
 .board-name{
@@ -23,6 +22,8 @@
 
 .column-wrapper{
   min-width: 300px;
+  max-width: 340px;
+  
   gap: 10px;
   border-radius: 10px;
   border: 1px solid #d9d9d9;

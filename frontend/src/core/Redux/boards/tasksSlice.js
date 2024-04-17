@@ -12,7 +12,11 @@ const tasksSlice = createSlice({
   name: "tasksSlice",
   reducers: {
     setTasks: (state, action) => {
-      const newTasks = action.payload.map(task => {
+      state.count = 0;
+      state.done = 0;
+      state.rest = 0;
+
+      state.tasks = action.payload.map(task => {
         state.count++;
         if (task.completed) {
           state.done++;
@@ -23,12 +27,12 @@ const tasksSlice = createSlice({
           ...task
         };
       });
-
-      state.tasks = [...newTasks];
     },
 
     addTask: (state, action) => {
-      return [...state, action.payload.task]
+      state.count++
+      state.rest++
+      state.tasks.push(action.payload)
     }
   }
 })

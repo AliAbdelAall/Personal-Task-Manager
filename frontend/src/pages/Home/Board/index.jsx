@@ -64,8 +64,9 @@ const Board = () => {
         {boardColumns?.map((column)=>(
           <Column
           key={column._id}
-          id={column._id}
+          currentColumnId={column._id}
           title={column.title}
+          currentBoardId={boardId}
           />
       
         ))

@@ -34,26 +34,19 @@ const Home = () => {
           const {columns, ...rest} = board
           return rest
         }) 
-        console.log(boardslist)
         dispatcher(setBoards(boardslist))
         let columnsList = []
         let tasksList = []
 
         boards.forEach(board => {
-          console.log(board)
-          console.log(board.columns)
-
           const columns = board.columns?.map((column) => {
-            console.log(column)
             const { tasks, ...rest} = column
             columnsList.push ({...rest, boardId: board._id})
 
             tasks?.map((task)=>{
-              tasksList.push({boardId: board._id,columnId: column._id, task,})
+              tasksList.push({columnId: column._id, task,})
             })
           })
-          console.log(tasksList)
-          console.log(columnsList)
           dispatcher(setColumns([...columnsList]))
           dispatcher(setTasks([...tasksList]))
         
