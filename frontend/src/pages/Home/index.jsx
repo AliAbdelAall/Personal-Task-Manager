@@ -49,7 +49,7 @@ const Home = () => {
             columnsList.push ({...rest, boardId: board._id})
 
             tasks?.map((task)=>{
-              tasksList.push({boardId: board._id,columnID: column._id, task,})
+              tasksList.push({boardId: board._id,columnId: column._id, task,})
             })
           })
           console.log(tasksList)

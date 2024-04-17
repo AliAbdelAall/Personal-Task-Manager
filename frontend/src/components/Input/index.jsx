@@ -2,7 +2,7 @@ import React from 'react'
 
 const Input = ({type, placeholder, handleChange}) => {
   return (
-    <input type={type} placeholder={placeholder} onChange={handleChange}/>
+    <input className='board-input' type={type} placeholder={placeholder} onChange={handleChange}/>
   )
 }
 
