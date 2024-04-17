@@ -1,9 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import "./style.css"
 
 //components
 import AddInput from '../../../components/AddInput'
 import AddButton from '../../../components/AddButton'
+
+// Redux
+import {useDispatch, useSelector} from "react-redux"
+import { boardSliceName, addBoard } from '../../../core/Redux/boards/boardsSlice'
+import { tagsSliceName, addTag } from '../../../core/Redux/boards/tagsSlice'
 
 // Utilities
 import { sendRequest } from '../../../core/Utilities/remote/request'
@@ -13,21 +19,43 @@ import { requestMethods } from '../../../core/Enums/requestMethods'
 import {toast} from "react-toastify"
 
 const MyBoards = () => {
+  const { boards } = useSelector((global) => global[boardSliceName])
+  const { tags } = useSelector((global) => global[tagsSliceName])
   const [boardInput, setBoardInput] = useState("")
   const [tagInput, setTagInput] = useState("")
-
-  console.log(boardInput, tagInput)
+  const dispatcher = useDispatch()
+  const navigate = useNavigate()
 
   const handleAddBoard = () => {
     sendRequest(requestMethods.POST, '/users/add-board', {
       name: boardInput
     }).then((response) => {
       if(response.status === 201){
-        toast.success("Tag saved Successfully")
+        toast.success("Board saved Successfully")
+        const board = addBoard(response.data.board)
+        dispatcher(board)
       }
     }).catch((error) => {
       toast.error("Something went wrong ...")
     })
+  }
+
+  const handleAddTag = () => {
+    sendRequest(requestMethods.POST, '/users/add-tag', {
+      name: tagInput
+    }).then((response) => {
+      if(response.status === 201){
+        toast.success("Tag saved Successfully")
+        const tag = addTag(response.data.tag)
+        dispatcher(tag)
+      }
+    }).catch((error) => {
+      toast.error("Something went wrong ...")
+    })
+  }
+
+  const handleBoardClick = (id) =>{
+    navigate(`/home/board/${id}`)
   }
 
   return (
@@ -48,14 +76,16 @@ const MyBoards = () => {
               />
              {boardInput && <AddButton
               text={"Add"}
+              handleClick={handleAddBoard}
               />}
             </div>
           </div>
           <div className='flex column names-container'>
-            <div className='created-name'>board Name</div>
-            <div className='created-name'>board Name</div>
-            <div className='created-name'>board Name</div>
-            <div className='created-name'>board Name</div>
+
+            {boards?.map((board) => (
+              <div className='created-name' key={board._id} id={board._id} onClick={(e) => handleBoardClick(e.target.id)}>{board.name}</div>
+            ))}
+
           </div>
         </div>
 
@@ -70,15 +100,16 @@ const MyBoards = () => {
               />
               {tagInput && <AddButton
               text={"Add"}
-              handleClick={handleAddBoard}
+              handleClick={handleAddTag}
               />}
             </div>
           </div>
           <div className='flex column names-container'>
-            <div className='created-name'>Tag Name</div>
-            <div className='created-name'>Tag Name</div>
-            <div className='created-name'>Tag Name</div>
-            <div className='created-name'>Tag Name</div>
+
+            {tags?.map((tag) => (
+              <div className='created-name'>{tag.name}</div>
+            ))}
+
           </div>
         </div>
       </div>

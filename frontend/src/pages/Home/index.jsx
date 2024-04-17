@@ -26,7 +26,7 @@ const Home = () => {
   const loadMyBoards = () => {
     sendRequest(requestMethods.GET, '/users/get-user').then((response)=>{
       if (response.status === 200){
-        toast.success("boards loade")
+        
         const { username, email, boards, tags } = response.data
         const userInfo = setUserInfo({username, email,})
         dispatcher(userInfo)
@@ -49,7 +49,7 @@ const Home = () => {
             columnsList.push ({...rest, boardId: board._id})
 
             tasks?.map((task)=>{
-              tasksList.push({columnID: column._id, task,})
+              tasksList.push({boardId: board._id,columnID: column._id, task,})
             })
           })
           console.log(tasksList)
@@ -59,12 +59,10 @@ const Home = () => {
         
         });
         
-        
-        
         let tagsList = []
         tags?.map((tag) => {tagsList.push(tag)})
         dispatcher(setTags(tagsList))
-           
+        toast.success("boards loaded")
       }
     }).catch((error)=>{
       console.error(error)
