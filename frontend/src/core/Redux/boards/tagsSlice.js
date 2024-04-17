@@ -1,17 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = []
+const initialState = {
+  tags: []
+}
 
 const tagsSlice = createSlice({
   initialState,
   name: "tagsSlice",
   reducers: {
     setTags: (state, action) => {
-      return [...action.payload.tags]
+      return { ...state, tags: [...action.payload] }
     },
 
     addTag: (state, action) => {
-      return [...state, action.payload.tag]
+      return { ...state, tags: [...state.tags, action.payload] }
     }
   }
 })
