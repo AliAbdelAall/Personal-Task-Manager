@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  boardId: "",
   columns: []
 }
 
@@ -10,13 +9,17 @@ const columnSlice = createSlice({
   name: "columnSlice",
   reducers: {
     setColumns: (state, action) => {
-      const { boardId, columns } = action.payload
-      return { ...state, boardId: boardId, columns: [...columns] }
-    }
+      console.log(action.payload)
+      return { ...state, columns: [...action.payload] }
+    },
+
+    addColumn: (state, action) => {
+      return { ...state, columns: [...state.columns, action.payload] }
+    },
   }
 })
 
-export const { setColumns } = columnSlice.actions
+export const { setColumns, addColumn } = columnSlice.actions
 
 export const columnSliceName = columnSlice.name
 
